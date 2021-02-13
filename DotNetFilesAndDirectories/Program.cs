@@ -8,7 +8,19 @@ namespace DotNetFilesAndDirectories
     {
         static void Main(string[] args)
         {
-            // Files info
+          var currentDirectory = Directory.GetCurrentDirectory();
+
+          var storesDirectory = Path.Combine(currentDirectory, "stores");
+
+          var saveFiles = FindFiles(storesDirectory);
+
+          foreach(var file in saveFiles) {
+              System.Console.WriteLine(file);
+          }
+        }
+
+        static void PathDemo(){
+              // Files info
             string fileName = $"stores{Path.DirectorySeparatorChar}201{Path.DirectorySeparatorChar}sales{Path.DirectorySeparatorChar}sales.json";
             FileInfo info = new FileInfo(fileName);
             System.Console.WriteLine($"Full Name: {info.FullName}{Environment.NewLine}Directory: {info.Directory}{Environment.NewLine}Extensions: {info.Extension}{Environment.NewLine}Create Date: {info.CreationTime}"); // And many more
@@ -46,10 +58,8 @@ namespace DotNetFilesAndDirectories
             var foundFiles = Directory.EnumerateFiles(folderName, "*", SearchOption.AllDirectories);
 
             foreach(var file in foundFiles){
-                // The file name will contain the full path,
-                // so only check the end of it
-
-                if(file.EndsWith("sales.json"))
+               var extension = Path.GetExtension(file);
+                if(extension == ".json")
                 {
                     salesFiles.Add(file);
                 }
