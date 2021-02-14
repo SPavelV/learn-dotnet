@@ -8,15 +8,15 @@ namespace DotNetFilesAndDirectories
     {
         static void Main(string[] args)
         {
-          var currentDirectory = Directory.GetCurrentDirectory();
+            var currentDirectory = Directory.GetCurrentDirectory();
+            var storesDirectory = Path.Combine(currentDirectory, "stores");
 
-          var storesDirectory = Path.Combine(currentDirectory, "stores");
+            var salesTotalDir = Path.Combine(currentDirectory, "salesTotalDir");
+            Directory.CreateDirectory(salesTotalDir);
 
-          var saveFiles = FindFiles(storesDirectory);
+            var files = FindFiles(storesDirectory);
 
-          foreach(var file in saveFiles) {
-              System.Console.WriteLine(file);
-          }
+            File.WriteAllText(Path.Combine(salesTotalDir, "totals.txt"), String.Empty);
         }
 
         static void PathDemo(){
